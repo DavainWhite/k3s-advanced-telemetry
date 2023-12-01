@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Config
+clusters:
+- name: "rke2-development-16gib-8vcpu-80gib"
+  cluster:
+    server: "https://rancher.davain.net/k8s/clusters/c-m-6dm8zdhg"
+
+users:
+- name: "rke2-development-16gib-8vcpu-80gib"
+  user:
+    token: "kubeconfig-user-fkzwxpc55x:v5wnzv2hbzbtvrb42fgpk6zq25ffrvs9rjz5hwnbbdqz94shkszqtz"
+
+
+contexts:
+- name: "rke2-development-16gib-8vcpu-80gib"
+  context:
+    user: "rke2-development-16gib-8vcpu-80gib"
+    cluster: "rke2-development-16gib-8vcpu-80gib"
+
+current-context: "rke2-development-16gib-8vcpu-80gib"

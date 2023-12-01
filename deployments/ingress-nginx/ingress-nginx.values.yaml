@@ -1,0 +1,65 @@
+  hostPort:
+    enabled: true
+    ports:
+      http: 80
+      https: 443
+
+  resources:
+    limits:
+      cpu: 100m
+      memory: 90Mi
+    requests:
+      cpu: 100m
+      memory: 90Mi
+
+  # Mutually exclusive with hpa autoscaling
+  keda:
+    apiVersion: "keda.sh/v1alpha1"
+    ## apiVersion changes with keda 1.x vs 2.x
+    ## 2.x = keda.sh/v1alpha1
+    ## 1.x = keda.k8s.io/v1alpha1
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 11
+    pollingInterval: 30
+    cooldownPeriod: 300
+    restoreToOriginalReplicaCount: false
+    scaledObject:
+      annotations: {}
+      # Custom annotations for ScaledObject resource
+      #  annotations:
+      # key: value
+    triggers: []
+ #     - type: prometheus
+ #       metadata:
+ #         serverAddress: http://<prometheus-host>:9090
+ #         metricName: http_requests_total
+ #         threshold: '100'
+ #         query: sum(rate(http_requests_total{deployment="my-deployment"}[2m]))
+
+    behavior: {}
+ #     scaleDown:
+ #       stabilizationWindowSeconds: 300
+ #       policies:
+ #       - type: Pods
+ #         value: 1
+ #         periodSeconds: 180
+ #     scaleUp:
+ #       stabilizationWindowSeconds: 300
+ #       policies:
+ #       - type: Pods
+ #         value: 2
+ #         periodSeconds: 60
+
+  opentelemetry:
+    enabled: false
+    image: registry.k8s.io/ingress-nginx/opentelemetry:v20230107-helm-chart-4.4.2-2-g96b3d2165@sha256:331b9bebd6acfcd2d3048abbdd86555f5be76b7e3d0b5af4300b04235c6056c9
+    containerSecurityContext:
+      allowPrivilegeEscalation: false
+
+  metrics:
+    serviceMonitor:
+      enabled: true
+
+    prometheusRule:
+      enabled: true

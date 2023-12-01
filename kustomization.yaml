@@ -1,0 +1,437 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - deployments/grafana/namespace-grafana.yaml
+  - deployments/ingress-nginx/namespace-ingress-nginx.yaml
+  - deployments/keda/namespace-keda.yaml
+  - deployments/prometheus/namespace-prometheus.yaml
+
+configMapGenerator:
+  - name: grafana-dashboard-alertmanager-overview
+    namespace: grafana
+    options:
+      disableNameSuffixHash: true
+      labels:
+        grafana_dashboard: "1"
+      annotations:
+        grafana_folder: Alertmanager
+    files:
+      - apps/dashboards/alertmanager/alertmanager-overview.json
+
+  - name: grafana-dashboard-apiserver
+    namespace: grafana
+    options:
+      disableNameSuffixHash: true
+      labels:
+        grafana_dashboard: "1"
+      annotations:
+        grafana_folder: Kubernetes
+    files:
+      - apps/dashboards/kubernetes/apiserver.json
+
+  - name: grafana-dashboard-cluster-total
+    namespace: grafana
+    options:
+      disableNameSuffixHash: true
+      labels:
+        grafana_dashboard: "1"
+      annotations:
+        grafana_folder: Kubernetes
+    files:
+      - apps/dashboards/kubernetes/cluster-total.json
+
+  - name: grafana-dashboard-controller-manager
+    namespace: grafana
+    options:
+      disableNameSuffixHash: true
+      labels:
+        grafana_dashboard: "1"
+      annotations:
+        grafana_folder: Kubernetes
+    files:
+      - apps/dashboards/kubernetes/controller-manager.json
+
+  - name: grafana-dashboard-grafana-overview
+    namespace: grafana
+    options:
+      disableNameSuffixHash: true
+      labels:
+        grafana_dashboard: "1"
+      annotations:
+        grafana_folder: Grafana
+    files:
+      - apps/dashboards/grafana/grafana-overview.json
+
+  - name: grafana-dashboard-k8s-resources-cluster
+    namespace: grafana
+    options:
+      disableNameSuffixHash: true
+      labels:
+        grafana_dashboard: "1"
+      annotations:
+        grafana_folder: Kubernetes
+    files:
+      - apps/dashboards/kubernetes/k8s-resources-cluster.json
+
+  - name: grafana-dashboard-k8s-resources-namespace
+    namespace: grafana
+    options:
+      disableNameSuffixHash: true
+      labels:
+        grafana_dashboard: "1"
+      annotations:
+        grafana_folder: Kubernetes
+    files:
+      - apps/dashboards/kubernetes/k8s-resources-namespace.json
+
+  - name: grafana-dashboard-k8s-resources-node
+    namespace: grafana
+    options:
+      disableNameSuffixHash: true
+      labels:
+        grafana_dashboard: "1"
+      annotations:
+        grafana_folder: Kubernetes
+    files:
+      - apps/dashboards/kubernetes/k8s-resources-node.json
+
+  - name: grafana-dashboard-k8s-resources-pod
+    namespace: grafana
+    options:
+      disableNameSuffixHash: true
+      labels:
+        grafana_dashboard: "1"
+      annotations:
+        grafana_folder: Kubernetes
+    files:
+      - apps/dashboards/kubernetes/k8s-resources-pod.json
+
+  - name: grafana-dashboard-k8s-resources-workload
+    namespace: grafana
+    options:
+      disableNameSuffixHash: true
+      labels:
+        grafana_dashboard: "1"
+      annotations:
+        grafana_folder: Kubernetes
+    files:
+      - apps/dashboards/kubernetes/k8s-resources-workload.json
+
+  - name: grafana-dashboard-k8s-resources-workloads-namespace
+    namespace: grafana
+    options:
+      disableNameSuffixHash: true
+      labels:
+        grafana_dashboard: "1"
+      annotations:
+        grafana_folder: Kubernetes
+    files:
+      - apps/dashboards/kubernetes/k8s-resources-workloads-namespace.json
+
+  - name: grafana-dashboard-kubelet
+    namespace: grafana
+    options:
+      disableNameSuffixHash: true
+      labels:
+        grafana_dashboard: "1"
+      annotations:
+        grafana_folder: Kubernetes
+    files:
+      - apps/dashboards/kubernetes/kubelet.json
+
+  - name: grafana-dashboard-namespace-by-pod
+    namespace: grafana
+    options:
+      disableNameSuffixHash: true
+      labels:
+        grafana_dashboard: "1"
+      annotations:
+        grafana_folder: Kubernetes
+    files:
+      - apps/dashboards/kubernetes/namespace-by-pod.json
+
+  - name: grafana-dashboard-namespace-by-workload
+    namespace: grafana
+    options:
+      disableNameSuffixHash: true
+      labels:
+        grafana_dashboard: "1"
+      annotations:
+        grafana_folder: Kubernetes
+    files:
+      - apps/dashboards/kubernetes/namespace-by-workload.json
+
+  - name: grafana-dashboard-node-cluster-rsrc-use
+    namespace: grafana
+    options:
+      disableNameSuffixHash: true
+      labels:
+        grafana_dashboard: "1"
+      annotations:
+        grafana_folder: Node Explorer
+    files:
+      - apps/dashboards/node-exporter/node-cluster-rsrc-use.json
+
+  - name: grafana-dashboard-node-rsrc-use
+    namespace: grafana
+    options:
+      disableNameSuffixHash: true
+      labels:
+        grafana_dashboard: "1"
+      annotations:
+        grafana_folder: Node Explorer
+    files:
+      - apps/dashboards/node-exporter/node-rsrc-use.json
+
+  - name: grafana-dashboard-nodes-darwin
+    namespace: grafana
+    options:
+      disableNameSuffixHash: true
+      labels:
+        grafana_dashboard: "1"
+      annotations:
+        grafana_folder: Node Explorer
+    files:
+      - apps/dashboards/node-exporter/nodes-darwin.json
+
+  - name: grafana-dashboard-nodes
+    namespace: grafana
+    options:
+      disableNameSuffixHash: true
+      labels:
+        grafana_dashboard: "1"
+      annotations:
+        grafana_folder: Node Explorer
+    files:
+      - apps/dashboards/node-exporter/nodes.json
+
+  - name: grafana-dashboard-persistentvolumesusage
+    namespace: grafana
+    options:
+      disableNameSuffixHash: true
+      labels:
+        grafana_dashboard: "1"
+      annotations:
+        grafana_folder: Kubernetes
+    files:
+      - apps/dashboards/kubernetes/persistentvolumesusage.json
+
+  - name: grafana-dashboard-pod-total
+    namespace: grafana
+    options:
+      disableNameSuffixHash: true
+      labels:
+        grafana_dashboard: "1"
+      annotations:
+        grafana_folder: Kubernetes
+    files:
+      - apps/dashboards/kubernetes/pod-total.json
+
+  - name: grafana-dashboard-prometheus-remote-write
+    namespace: grafana
+    options:
+      disableNameSuffixHash: true
+      labels:
+        grafana_dashboard: "1"
+      annotations:
+        grafana_folder: Prometheus
+    files:
+      - apps/dashboards/prometheus/prometheus-remote-write.json
+
+  - name: grafana-dashboard-prometheus
+    namespace: grafana
+    options:
+      disableNameSuffixHash: true
+      labels:
+        grafana_dashboard: "1"
+      annotations:
+        grafana_folder: Prometheus
+    files:
+      - apps/dashboards/prometheus/prometheus.json
+
+  - name: grafana-dashboard-proxy
+    namespace: grafana
+    options:
+      disableNameSuffixHash: true
+      labels:
+        grafana_dashboard: "1"
+      annotations:
+        grafana_folder: Kubernetes
+    files:
+      - apps/dashboards/kubernetes/proxy.json
+
+  - name: grafana-dashboard-scheduler
+    namespace: grafana
+    options:
+      disableNameSuffixHash: true
+      labels:
+        grafana_dashboard: "1"
+      annotations:
+        grafana_folder: Kubernetes
+    files:
+      - apps/dashboards/kubernetes/scheduler.json
+
+  - name: grafana-dashboard-workload-total
+    namespace: grafana
+    options:
+      disableNameSuffixHash: true
+      labels:
+        grafana_dashboard: "1"
+      annotations:
+        grafana_folder: Kubernetes
+    files:
+      - apps/dashboards/kubernetes/workload-total.json
+
+  - name: grafana-dashboard-cnp
+    namespace: grafana
+    options:
+      disableNameSuffixHash: true
+      labels:
+        grafana_dashboard: "1"
+      annotations:
+        grafana_folder: Cloud Native PostgreSQL
+    files:
+      - apps/dashboards/cloudnative-pg/cnp.json
+
+  - name: grafana-dashboard-kubernetes-nginx-ingress-via-prometheus
+    namespace: grafana
+    options:
+      disableNameSuffixHash: true
+      labels:
+        grafana_dashboard: "1"
+      annotations:
+        grafana_folder: Nginx Ingress
+    files:
+      - apps/dashboards/nginx-ingress/kubernetes-nginx-ingress-via-prometheus.json
+
+  - name: grafana-dashboard-erlang-distribution
+    namespace: grafana
+    options:
+      disableNameSuffixHash: true
+      labels:
+        grafana_dashboard: "1"
+      annotations:
+        grafana_folder: RabbitMQ
+    files:
+      - apps/dashboards/rabbitmq/erlang-distribution.json
+
+  - name: grafana-dashboard-erlang-distributions-compare
+    namespace: grafana
+    options:
+      disableNameSuffixHash: true
+      labels:
+        grafana_dashboard: "1"
+      annotations:
+        grafana_folder: RabbitMQ
+    files:
+      - apps/dashboards/rabbitmq/erlang-distributions-compare.json
+
+  - name: grafana-dashboard-erlang-memory-allocators
+    namespace: grafana
+    options:
+      disableNameSuffixHash: true
+      labels:
+        grafana_dashboard: "1"
+      annotations:
+        grafana_folder: RabbitMQ
+    files:
+      - apps/dashboards/rabbitmq/erlang-memory-allocators.json
+
+  - name: grafana-dashboard-rabbitmq-alerts-grafana-dashboard
+    namespace: grafana
+    options:
+      disableNameSuffixHash: true
+      labels:
+        grafana_dashboard: "1"
+      annotations:
+        grafana_folder: RabbitMQ
+    files:
+      - apps/dashboards/rabbitmq/rabbitmq-alerts-grafana-dashboard.json
+
+  - name: grafana-dashboard-rabbitmq-overview
+    namespace: grafana
+    options:
+      disableNameSuffixHash: true
+      labels:
+        grafana_dashboard: "1"
+      annotations:
+        grafana_folder: RabbitMQ
+    files:
+      - apps/dashboards/rabbitmq/rabbitmq-overview.json
+
+  - name: grafana-dashboard-rabbitmq-queue-grafana-dashboard
+    namespace: grafana
+    options:
+      disableNameSuffixHash: true
+      labels:
+        grafana_dashboard: "1"
+      annotations:
+        grafana_folder: RabbitMQ
+    files:
+      - apps/dashboards/rabbitmq/rabbitmq-queue-grafana-dashboard.json
+
+  - name: grafana-dashboard-rabbitmq-quorum-queues-raft
+    namespace: grafana
+    options:
+      disableNameSuffixHash: true
+      labels:
+        grafana_dashboard: "1"
+      annotations:
+        grafana_folder: RabbitMQ
+    files:
+      - apps/dashboards/rabbitmq/rabbitmq-quorum-queues-raft.json
+
+  - name: grafana-dashboard-rabbitmq-stream
+    namespace: grafana
+    options:
+      disableNameSuffixHash: true
+      labels:
+        grafana_dashboard: "1"
+      annotations:
+        grafana_folder: RabbitMQ
+    files:
+      - apps/dashboards/rabbitmq/rabbitmq-stream.json
+
+helmCharts:
+  - name: grafana
+    version: 6.50.4
+    repo: https://grafana.github.io/helm-charts
+    releaseName: grafana
+    namespace: grafana
+    valuesFile: ./deployments/grafana/grafana.values.yaml
+    valuesMerge: merge
+    includeCRDs: true
+
+  - name: prometheus
+    version: 19.3.3
+    repo: https://prometheus-community.github.io/helm-charts
+    releaseName: prometheus
+    namespace: prometheus
+    valuesFile: ./deployments/prometheus/prometheus.values.yaml
+    valuesMerge: merge
+    includeCRDs: true
+
+  - name: prometheus-operator-crds
+    version: 1.0.0
+    repo: https://prometheus-community.github.io/helm-charts
+    releaseName: prometheus-operator-crds
+    namespace: prometheus
+    includeCRDs: true
+
+  - name: ingress-nginx
+    version: 4.4.2
+    repo: https://kubernetes.github.io/ingress-nginx
+    releaseName: ingress-nginx
+    namespace: ingress-nginx
+    valuesFile: ./deployments/ingress-nginx/ingress-nginx.values.yaml
+    valuesMerge: merge
+    includeCRDs: true
+
+  - name: keda
+    version: 2.9.3
+    repo: https://kedacore.github.io/charts
+    releaseName: keda
+    namespace: keda
+    valuesFile: ./deployments/keda/keda.values.yaml
+    valuesMerge: merge
+    includeCRDs: true

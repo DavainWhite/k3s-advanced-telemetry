@@ -1,0 +1,26 @@
+sidecar:
+  dashboards:
+    enabled: true
+    folderAnnotation: grafana_folder
+    provider:
+      foldersFromFilesStructure: true
+
+serviceMonitor:
+  enabled: true
+
+testFramework:
+  enabled: false
+
+plugins:
+  - flant-statusmap-panel
+
+datasources:
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+      - name: Prometheus
+        type: prometheus
+        url: http://prometheus-server.prometheus.svc.cluster.local
+        orgId: 1
+        access: proxy
+        isDefault: true
