@@ -1,5 +1,3 @@
-allow_k8s_contexts('rke2-development-16gib-8vcpu-80gib')
-
 # k8s_resource(
 #   new_name='grafana-dashboard-configmaps',
 #   objects=[
